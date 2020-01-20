@@ -1,0 +1,56 @@
+<ion-menu [content]="nav">
+
+    
+    <ion-header >
+     <ion-card class="h">
+        <ion-item class="p">
+            <ion-avatar item-start >
+             <img *ngIf="imagePath" src="{{user?.ImageURL}}">
+             <img *ngIf="imagePath==''" src="../assets/imgs/download.jpg">
+
+            </ion-avatar>
+        </ion-item>
+        <ion-item>
+            <h2>{{user?.UserName}}</h2>
+            <p>{{user?.Email}}</p>
+        </ion-item>
+    </ion-card> 
+    </ion-header>
+  
+  
+    <ion-content>
+  
+      <ion-list>
+      <button *ngIf="isAuthinticated" ion-item (click)="onLoad(homepage)"> 
+        <ion-icon name="home"></ion-icon>
+        Homa</button>
+
+        <button *ngIf="isAuthinticated" ion-item (click)="onLoad(scannedProductsPage)"> 
+        <ion-icon name="md-camera"></ion-icon>
+        Scanned products</button>
+  
+        <button *ngIf="isAuthinticated" ion-item (click)="onLoad(favouritesPage)">
+         <ion-icon name="md-heart"></ion-icon>
+         Favourites</button>
+  
+        <button *ngIf="isAuthinticated" ion-item (click)="onLoad(reviewsPage)">
+        <ion-icon name="md-add-circle"></ion-icon>    
+        Reviews</button>
+  
+        <button *ngIf="!isAuthinticated" ion-item (click)="onLoad(signUpPage)">
+        <ion-icon name="md-person-add"></ion-icon>
+        sign up</button>
+  
+        <button *ngIf="!isAuthinticated" ion-item (click)="onLoad(logInPage)">
+          <ion-icon name="md-log-in"></ion-icon>
+        log in </button>
+  
+  
+  
+      </ion-list>
+  
+    </ion-content>
+  </ion-menu>
+  
+  <ion-nav [root]="rootPage" #nav ></ion-nav>
+  

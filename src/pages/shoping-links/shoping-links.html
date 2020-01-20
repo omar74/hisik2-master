@@ -1,0 +1,87 @@
+<!--
+  Generated template for the ShopingLinksPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+ 
+ <div *ngIf="Links?.length>0">
+    <ion-card *ngFor="let link of Links" class="card">
+        <ion-card-content >
+          <ion-card-title class="Paragraphtitle">
+              {{link?.title}}
+          </ion-card-title>
+          <p class="ParagraphCard">
+              {{link?.snippet}}
+          </p>
+          <ion-grid class="grid">
+                    <ion-row class="gridrow">
+                        <ion-col class="first">Seller</ion-col>
+                        <ion-col>{{link?.merchant}}</ion-col>
+                    </ion-row>
+                    <ion-row class="gridrow">
+                      <ion-col class="first">Price</ion-col>
+                      <ion-col>{{link?.price}}</ion-col>
+                    </ion-row>
+                    <ion-row class="gridrow" *ngIf="link?.reviews">
+                        <ion-col class="first">Total Reviews</ion-col>
+                        <ion-col>{{link?.reviews}}</ion-col>
+                    </ion-row>
+                    <ion-row class="gridrow" *ngIf="!link?.reviews">
+                            <ion-col class="first">Total Reviews</ion-col>
+                            <ion-col>0</ion-col>
+                    </ion-row>
+                    <ion-row  class="gridrow" *ngIf="link?.rating">
+                        <ion-col class="first">Rating</ion-col>
+                        <ion-col>{{link?.rating}}</ion-col>
+                    </ion-row>
+                    <ion-row  class="gridrow" *ngIf="!link?.rating">
+                            <ion-col class="first">Rating</ion-col>
+                            <ion-col>0</ion-col>
+                        </ion-row>
+                    <ion-row *ngIf="link?.rating">
+                            <ion-col class="Rating">
+                                    <ionic3-star-rating 
+                                    activeIcon = "ios-star"
+                                    defaultIcon = "ios-star-outline"
+                                    activeColor = "#FFDF00" 
+                                    defaultColor = "#FFDF00"
+                                    readonly="true"
+                                     [rating]="link?.rating">
+                                    </ionic3-star-rating>
+                            </ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="!link?.rating">
+                            <ion-col class="Rating">
+                                    <ionic3-star-rating 
+                                    activeIcon = "ios-star"
+                                    defaultIcon = "ios-star-outline"
+                                    activeColor = "#FFDF00" 
+                                    defaultColor = "#FFDF00"
+                                    readonly="true"
+                                     [rating]="0">
+                                    </ionic3-star-rating>
+                            </ion-col>
+                    </ion-row>
+                    <ion-row>
+                         <ion-col>
+                              <button ion-button block outline color="danger" icon-start (click)="OpenUrl(link?.link)">
+                                      <ion-icon name="open"></ion-icon>
+                                       Visit
+                              </button>
+                         </ion-col>
+                    </ion-row>
+          </ion-grid>
+        </ion-card-content>
+  </ion-card>
+
+</div>
+ <div>
+  <div class="hero-image" *ngIf="Links?.length == 0 && proceed == true">
+    <div class="hero-text">
+      <h1 style="font-size:50px">there is no possible links for this: <span>{{product}}</span></h1>
+    </div>
+  </div>
+ </div>

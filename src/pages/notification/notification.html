@@ -1,0 +1,72 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Notification</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-list *ngIf="isauthinticated">
+        <ion-list-header color="danger">
+          Recommended Product
+        </ion-list-header>
+            <div *ngFor="let recommend of Notification;let i = index;">
+              <button *ngIf="recommend?.Type == 1" [ngStyle]="{'background-color': !recommend?.Status ? 'lightgray' : 'white'}" id="recommendnotification" ion-item (click)="openProduct(i,recommend?.id,recommend,recommend?.productDetails)" >
+                 <ion-thumbnail item-start>
+                      <img src="{{recommend.productDetails?.ImageURL}}">
+                 </ion-thumbnail>
+                  <h2>{{recommend.productDetails?.name}}</h2>
+                  <p>{{recommend.productDetails?.Description}}</p>
+                  <ion-note item-end>{{recommend?.timestamp | date }}</ion-note>
+              </button>
+            </div>
+        <ion-list-header id="socialheader" color="danger">
+           Social
+        </ion-list-header>
+        <div *ngFor="let social of Notification;let i = index;">
+            <button  *ngIf="social?.Type == 2" [ngStyle]="{'background-color': !social?.Status ? 'lightgray' : 'white'}" ion-item (click)="openNotify()">
+                <ion-avatar item-start>
+                    <img src="{{social.NotifyuserDetalis?.ImageURL}}">
+                  </ion-avatar>
+                  <h2>{{social.NotifyuserDetalis?.UserName}}</h2>
+                  <p>{{social.NotifyuserDetalis?.UserName}} has replyed to your review</p>
+                  <p>{{social.reviewDetails?.text}}</p>
+                  <ion-note item-end>{{recommend?.timestamp | date }}</ion-note>
+            </button>
+        </div>
+        <div *ngFor="let social of Notification;let i = index;">
+            <button  *ngIf="social?.Type == 1" [ngStyle]="{'background-color': !social?.Status ? 'lightgray' : 'white'}" ion-item (click)="openNotify(1,social?.id,social,social?.reviewDetails)">
+                <ion-avatar item-start>
+                    <img src="{{social.NotifyuserDetalis?.ImageURL}}">
+                  </ion-avatar>
+                  <h2>{{social.NotifyuserDetalis?.UserName}}</h2>
+                  <p>{{social.NotifyuserDetalis?.UserName}} has liked your review</p>
+                  <p>{{social.reviewDetails?.text}}</p>
+                  <ion-note item-end>{{recommend?.timestamp | date }}</ion-note>
+            </button>
+        </div>
+   </ion-list>
+   <div class="hero-image" *ngIf="!isauthinticated">
+      <div class="hero-text">
+        <h1 style="font-size:50px">Welcome to <span>HISIK</span></h1>
+        <h6>Please,login or make an account first!</h6>
+        <div class="authbutton">
+          <button ion-button icon-end block round outline id="authlog" (click)="Login()" *ngIf="!isauthinticated" >
+              Log In
+            <ion-icon name="log-in"></ion-icon>
+           </button>
+           <button ion-button icon-end block round outline id="authlog"  (click)="SignUp()" *ngIf="!isauthinticated">
+              Sign Up
+            <ion-icon name="md-person-add"></ion-icon>
+           </button>
+        </div>
+      </div>
+    </div>
+</ion-content>
+<ion-fab right bottom id="fabs">
+    <button ion-fab icon-only (click)="openScan()">
+      <ion-icon name="camera" color="blue"></ion-icon>
+    </button>
+</ion-fab>
+<!--<page-fab-camera></page-fab-camera>-->

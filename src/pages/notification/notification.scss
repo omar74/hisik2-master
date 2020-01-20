@@ -1,0 +1,73 @@
+page-notification {
+    #fabs
+    {
+        bottom:50px;
+        right:20px;
+        position:fixed;
+        z-index: 1;
+        transform: none !important;
+    }
+    ion-list
+    {
+        //max-width: fit-content !important;
+        width: 100vw !important;
+        position: relative;
+        left:-16px;
+        top:-14px;
+    }
+    h2
+    {
+        color:#075682;
+        font-family:AxiForma; 
+    }
+    p
+    {
+        color:black;
+        font-family:Arial, Helvetica, sans-serif; 
+    }
+    ion-list #socialheader
+    {
+        margin-top:5px;
+    }
+
+    .hero-image {
+        //background: url("../assets/imgs/Hisik-Logo-Icon.png") no-repeat center; 
+        background-size: cover;
+        height: 400px;
+        width: 100vw !important;
+        left:-16px;
+        position: relative;
+        top:30px;
+        font-family: AxiForma;
+        font-weight: bold;
+    }
+     
+     .hero-text {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #9E9E9E;
+   
+     }
+     .hero-text .authbutton
+     {
+         width:200px;
+         position: relative;
+         top:50px;
+         left:20px;
+     }  
+     .hero-text  h1 span 
+     {
+         display: block;
+         color: #5A5A5A;
+     }
+     #authlog
+     {
+         background-color: #075682;
+         color: white;
+         font-family: Arial, Helvetica, sans-serif;
+         border: 1px solid white;
+     }
+}

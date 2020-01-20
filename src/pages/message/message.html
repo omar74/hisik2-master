@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar>
+      <ion-title> What's your problem ?</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form #form="ngForm" (ngSubmit)="sendMessage(form)">
+        <ion-list>
+          <ion-list-header style="font-family: AxiForma;font-weight: medium;" color="danger">
+              <ion-icon name="text" item-start></ion-icon> 
+           Send your problem
+          </ion-list-header>  
+          <ion-item>
+             <textarea style="font-family: AxiForma;font-weight: medium;" placeholder="how we can help?" ngModel name="text" required clearInput="true"></textarea>
+          </ion-item>
+          <ion-item> 
+            <ion-input style="font-family: AxiForma;font-weight: medium;" type="text" name="username" placeholder="Your name" Value="" required ngModel clearInput="true"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input style="font-family: AxiForma;font-weight: medium;" type="email" name="email" placeholder="Email" Value="" required ngModel clearInput="true"></ion-input>
+          </ion-item>
+          <button style="font-family: AxiForma;font-weight: medium;" ion-button type="submit"  block color="danger"  [disabled]="!form.valid">
+              <ion-icon name="send" item-start></ion-icon>
+               Send
+           </button> 
+          </ion-list>
+        </form>   
+</ion-content>
+<page-fab-camera></page-fab-camera>

@@ -1,0 +1,31 @@
+<ion-header mode="md" >
+   <page-top-bar  [Pagetitle]="title"></page-top-bar>
+  <ion-toolbar>
+      <div id="tabs">
+         <ion-segment  class="SwipedTabs-tabs">
+           <ion-segment-button  *ngFor='let tab of tabs ; let i = index ' id="tabTitle{{i}}" value="IngoreMe" (click)="selectTab(i)"
+           [ngClass]='{ "SwipedTabs-activeTab" : ( this.SwipedTabsSlider  && ( this.SwipedTabsSlider.getActiveIndex() === i || (  tabs.length -1 === i&& this.SwipedTabsSlider.isEnd()))) }'   >
+           <ion-icon large name="{{tab}}"></ion-icon>
+         </ion-segment-button>
+       </ion-segment>
+     </div>
+       <!-- here is our dynamic line  "indicator"-->
+       <div id='indicator' class="SwipedTabs-indicatorSegment"></div>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content padding style="overflow-y: auto">
+    <ion-slides #SwipedTabsSlider  (ionSlideDrag)="animateIndicator($event)"
+    (ionSlideDidChange)="updateIndicatorPosition()"
+    (ionSlideWillChange)="updateIndicatorPosition()"
+    (panend)="updateIndicatorPositionOnTouchEnd()"
+    [pager]="false">
+          <ion-slide style="overflow-y: auto">
+             <page-search></page-search>
+          </ion-slide>
+          <ion-slide>
+             <page-profile></page-profile>
+          </ion-slide>
+    </ion-slides>
+</ion-content>
+<page-fab-camera></page-fab-camera>

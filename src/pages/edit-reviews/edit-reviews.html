@@ -1,0 +1,44 @@
+<ion-header mode="md" >
+    <page-top-bar  Pagetitle="Edit Reviews"></page-top-bar>
+</ion-header>
+
+<br><br>
+
+<ion-content padding>
+    
+        <ion-list>
+           <ion-item>
+               <ion-avatar item-start>
+                 <img *ngIf="review.userData?.ImageURL" src="{{user?.ImageURL}}">
+                 <img *ngIf="!review.userData?.ImageURL" src="../assets/imgs/download.jpg">
+               </ion-avatar>
+                   <ionic3-star-rating 
+                      (click)="getrate()"
+                      activeIcon = "ios-star"
+                      defaultIcon = "ios-star-outline"
+                      activeColor = "#FFDF00" 
+                      defaultColor = "#FFDF00"
+                      readonly="false"
+                      [rating]="review?.rate"
+                      >
+                   </ionic3-star-rating>
+          </ion-item>
+          <form #form="ngForm" (ngSubmit)="UpdateReview(form)">
+          <ion-item>
+             <ion-input type="text" [ngModel]="review?.text" name="text" required placeholder=" put your opinion"></ion-input>
+          </ion-item>
+          <ion-item>
+              <button ion-button block type="submit" icon-only color="danger" [disabled]="!form.valid">
+                  <ion-icon name="send"  item-start></ion-icon>
+               </button>
+          </ion-item>
+        </form>
+       </ion-list>    
+   <ion-item>
+      <button ion-button block  icon-start color="danger" (click)="cancel()">
+        <ion-icon ios="ios-close" md="md-close"></ion-icon>
+            Cancel
+       </button>
+  </ion-item>
+</ion-content>
+<page-fab-camera></page-fab-camera>

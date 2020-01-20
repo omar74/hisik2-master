@@ -1,0 +1,48 @@
+<ion-header mode="md" >
+  <page-top-bar  [Pagetitle]="text"></page-top-bar>
+</ion-header>
+
+<ion-content padding>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <ion-list *ngFor='let product of RateResult;let i = index'>
+      <ion-item>
+            <div *ngIf='isauth;then show else hide'></div>
+            <ng-template #show>
+                <div *ngIf='FavResult[i].isfav;then dislike else liked'>
+                  </div>
+                 <ng-template #dislike>
+                    <ion-icon name="bookmark" color="danger" style="margin-left: 220px"></ion-icon>
+                </ng-template>
+                <ng-template #liked>
+                    <ion-icon name="ios-bookmark-outline" color="dark" style="margin-left: 220px"></ion-icon>
+                </ng-template>
+            </ng-template>
+            <ng-template #hide>
+                <ion-icon name="bookmark-outline" style="margin-left: 220px"></ion-icon>
+            </ng-template>
+           
+        <ion-avatar item-start>
+          <img src="{{product.product?.ImageURL}}">
+        </ion-avatar>
+        <h2 style="font-family: AxiForma;font-weight: medium;">{{product.product?.name}}</h2>
+        <p style="font-family: AxiForma;font-weight: medium;">{{product.product?.Description}}</p>
+        <div style="display: block">
+            <span [ngClass]="(product?.stars>=1)?'fa fa-star checked':'fa fa-star'"></span>
+            <span [ngClass]="(product?.stars>=2)?'fa fa-star checked':'fa fa-star'"></span>
+            <span [ngClass]="(product?.stars>=3)?'fa fa-star checked':'fa fa-star'"></span>
+            <span [ngClass]="(product?.stars>=4)?'fa fa-star checked':'fa fa-star'"></span>
+            <span [ngClass]="(product?.stars==5)?'fa fa-star checked':'fa fa-star'"></span>
+            <p style="display: inline-block" *ngIf="product?.rate">{{product?.rate}}</p>
+            <p style="display: inline-block" *ngIf="!product?.rate">0</p>
+        </div>
+        <button 
+        (click)="Detials(product?.product)"
+        style="margin-left: 160px ;font-family: AxiForma;" 
+        ion-button color="danger" round>
+        Show</button>
+      </ion-item>
+    </ion-list>
+
+</ion-content>
+<page-fab-camera></page-fab-camera>
+

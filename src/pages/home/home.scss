@@ -1,0 +1,82 @@
+page-home {
+
+    .SwipedTabs-indicatorSegment
+    {
+         -webkit-transition: 0.2s all;
+         -moz-transition:  0.2s all;
+         -o-transition:  0.2s all;
+         transition:  0.2s all;
+         transform-origin: top 0 left 0;
+         height: 1px;
+         position: relative;
+         top: 6.50px;
+         background-color: color($colors ,primary) !important;
+    }
+    #tabs
+    {
+     bottom: 5px;
+     position: relative;
+     background-color: none;
+    }
+    #tabs :active
+    {
+        background-color:none;
+    }
+    .SwipedTabs-tabs ion-segment-button
+    {
+         border:none !important;
+         color:red!important;
+         padding-left: 20px !important;
+         padding: 10%;
+         padding-right: 20px !important;
+         background-color: inherit !important;
+    }
+
+     .SwipedTabs-tabs ion-segment-button.SwipedTabs-activeTab
+    {
+        color: color($colors ,primary) !important;
+    }
+
+    /*.SwipedTabs-tabs
+    {
+        width: fit-content !important;
+    }*/
+
+     .toolbar *
+    {
+        margin: 0 !important;
+    }
+
+    .tabsContent
+    {
+        height: 50px !important;
+    }
+
+    .segment-button
+    {
+        max-width: initial !important;
+        flex: auto !important;
+        width: initial !important;
+    }
+    ion-slides
+      {
+         height: auto;
+      }
+}
+.ios{
+    page-home {
+        .SwipedTabs-indicatorSegment
+        {
+             -webkit-transition: 0.2s all;
+             -moz-transition:  0.2s all;
+             -o-transition:  0.2s all;
+             transition:  0.2s all;
+             transform-origin: top 0 left 0;
+             height: 1px;
+             position: relative;
+             top: 20px;
+             background-color:  color($colors ,primary) !important;
+        }
+     }
+}
+

@@ -1,0 +1,59 @@
+<ion-header>
+    <page-top-bar Pagetitle="Scannned Product"></page-top-bar>
+</ion-header>
+
+<br><br>
+ 
+
+<ion-content>
+
+
+  <ion-grid class="gird">
+    <ion-row *ngFor="let Scanned of ScannedProducts;let i = index" >
+       <ion-col class="col" >
+        <ion-card *ngIf="Scanned?.Blocked == null  || Scanned?.Blocked == false  ">
+            <img class="photo" src="{{Scanned?.ImageURL}}">
+
+            <div *ngIf="Scanned?.satisfy != null ||  Scanned?.satisfy == false">
+              <ion-card-content>
+                <ion-card-title class="name">
+                    {{Scanned.productDetails?.name}}
+                </ion-card-title>
+                <ion-row>
+                  <ion-col class="red">Category</ion-col>
+                  <ion-col class="data"> {{Scanned.productDetails.product_Category?.Name}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="red">Brand</ion-col>
+                  <ion-col class="data"> {{Scanned.productDetails.product_Brand?.Name}}</ion-col>
+                </ion-row>
+              </ion-card-content>
+              <ion-row>
+                  <ion-col>
+                      <button ion-button block round outline color="danger" (click)="detail(Scanned?.productDetails)">
+                        details
+                      </button>
+                  </ion-col>
+                  <ion-col>
+                      <button ion-button block round outline  (click)="Delete(i,Scanned?.id)">Delete</button>
+                  </ion-col>
+              </ion-row>
+            </div> 
+            <div *ngIf="Scanned?.satisfy == null ||  Scanned?.satisfy == true">
+                <ion-card-content>
+                    <ion-card-title class="warnning">
+                        This scan didn't satisfy
+                    </ion-card-title>
+                </ion-card-content>
+                <ion-row>
+                    <ion-col>
+                        <button ion-button block round outline (click)="Delete(i,Scanned?.id)">Delete</button>
+                    </ion-col>
+                </ion-row>
+            </div> 
+       </ion-card>
+      </ion-col> 
+     </ion-row>
+   </ion-grid>
+</ion-content>
+<page-fab-camera></page-fab-camera>

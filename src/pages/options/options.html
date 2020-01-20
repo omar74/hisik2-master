@@ -1,0 +1,27 @@
+<ion-list id="optionlist" inset>
+   <div *ngIf="settingOptions">
+       <button ion-item (click)="Close(1)">
+             <ion-icon name="settings" item-start></ion-icon>
+              Setting
+       </button>
+       <button ion-item (click)="Close(2)">
+               <ion-icon name="help-circle" item-start ></ion-icon>
+               FAQ&Help
+       </button>
+       <button ion-item (click)="Close(3)">
+               <ion-icon name="contacts" item-start></ion-icon>
+               ContactSupport
+       </button>
+   </div>
+   <div *ngIf="reviewOptions">
+       <button ion-item (click)="Close(4)">
+               <ion-icon  name="create" item-start ></ion-icon>
+                Update
+       </button>
+       <button ion-item (click)="Close(5)">
+               <ion-icon name="trash" item-start></ion-icon>
+                Delete
+       </button>
+   </div>
+ </ion-list>
+ 

@@ -1,0 +1,53 @@
+
+<ion-header mode="md" >
+    <page-top-bar  Pagetitle="Report"></page-top-bar>
+</ion-header>
+
+
+<ion-content padding>
+  <form #form="ngForm" (ngSubmit)="SendReport(form)">
+    <ion-list>
+
+      <ion-item>
+        <ion-label style="font-family: AxiForma;font-weight: medium;">Name :</ion-label>
+        <ion-input type="text"   name='Name'  required [ngModel]="product?.name"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label style="font-family: AxiForma;font-weight: medium;">Category :</ion-label>
+        <ion-input type="text"   name='Category'  required [ngModel]="product.product_Category?.Name"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label style="font-family: AxiForma;font-weight: medium;">Brand :</ion-label>
+        <ion-input type="text"   name='Brand'  required [ngModel]="product.product_Brand?.Name"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label style="font-family: AxiForma;font-weight: medium;">Description :</ion-label>
+        <ion-input type="text"   name='Description' [ngModel]="product?.Description"></ion-input>
+      </ion-item>
+            
+      <ion-item>
+        <ion-label style="font-family: AxiForma;font-weight: medium;">Comment :</ion-label>
+        <ion-input type="text"  name='Comment' placeholder="optional" ngModel></ion-input>
+      </ion-item>
+      <button style="font-family: AxiForma;font-weight: medium;" ion-button icon-end color="royal" [disabled]="!form.valid" >
+        Send
+        <ion-icon name="send"></ion-icon>
+      </button>   
+      </ion-list>  
+    </form>   
+      <!--<ion-footer>
+        <ion-toolbar>
+          
+          <ion-buttons end>
+            <button ion-button icon-end color="royal" [disabled]="!form.valid" >
+              Send
+              <ion-icon name="send"></ion-icon>
+            </button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>-->
+</ion-content>
+<page-fab-camera ></page-fab-camera>

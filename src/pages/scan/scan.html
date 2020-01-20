@@ -1,0 +1,67 @@
+<ion-content>
+
+  <div class="holder" *ngIf="picture">
+    <div class="img" [ngStyle]="{'background-image': 'url('+picture+')' ,'background-position':'center','background-repeat': 'no-repeat' , 'background-size': 'cover'}">
+        <!--<img  src="{{picture}}">-->
+    </div>
+        <button ion-button clear icon-only id="back" (click)="swaptoLeft()"> 
+            <ion-icon name="ios-arrow-back-outline"></ion-icon>
+        </button>
+        <div class="slide">
+            <ion-slides  loop=true pager=false (ionSlideDidChange)="slideChanged()">
+                <ion-slide *ngFor= "let result of labelAnotation">
+                  <h2>{{ result.description }}</h2>
+                </ion-slide>
+            </ion-slides>
+        </div>
+        <button ion-button clear icon-only id="forword" (click)="swaptoRight()">
+            <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+        </button>
+   <div class="trans">
+   <ion-fab  id="fabs3">
+      <button ion-fab (click)="goback()">
+        <ion-icon name="ios-close-circle-outline"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-fab  id="fabs1">
+      <button ion-fab (click)="startCamera()">
+        <ion-icon name="md-refresh"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-fab  id="fabs2">
+      <button ion-fab (click)="classify()">
+        <ion-icon name="md-checkmark"></ion-icon>
+      </button>
+    </ion-fab>
+   </div>
+  </div>
+
+  <div class="holder" *ngIf="!picture">
+
+<div class="holder" *ngIf="!picture">
+     <ion-fab top right id="topRight">
+          <button ion-fab (click)="switchCamera()">
+            <ion-icon name="ios-reverse-camera-outline"></ion-icon>
+          </button>
+      </ion-fab>
+    <div class="trans2">
+      <ion-fab id="fabs3">
+        <button ion-fab (click)="gohome()">
+          <ion-icon name="ios-close-circle-outline"></ion-icon>
+        </button>
+       </ion-fab>
+       <ion-fab  id="fabs1">
+        <button ion-fab (click)="takePicture()">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+      </ion-fab>
+      <ion-fab id="fabs2">
+        <button ion-fab (click)="UploadImage()">
+          <ion-icon name="ios-images-outline"></ion-icon>
+        </button>
+      </ion-fab>
+    </div>   
+    
+</div>
+ 
+</ion-content>

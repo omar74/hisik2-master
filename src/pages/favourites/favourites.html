@@ -1,0 +1,28 @@
+<ion-header mode="md" >
+    <page-top-bar  Pagetitle="Favourites"></page-top-bar>
+</ion-header>
+
+<br><br>
+ 
+<ion-content >
+  <ion-card *ngFor="let Favourite of FavouriteProducts">
+    <img class="photo" src="{{Favourite.ProductDetails?.ImageURL}}">
+    <ion-card-content>
+        <ion-card-title class="name">
+            {{Favourite.ProductDetails?.name}}
+        </ion-card-title>
+
+        <h2 class="des">
+            {{Favourite.ProductDetails?.Description}}
+        </h2>
+<br>
+        <h3 class="time">
+            {{Favourite?.timestamp | date}}        
+        </h3>
+
+    </ion-card-content>
+    <button ion-button block round outline color="danger" (click)="product(Favourite?.ProductDetails)">Details</button>
+  </ion-card>
+</ion-content>
+<page-fab-camera></page-fab-camera>
+

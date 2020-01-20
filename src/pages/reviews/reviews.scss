@@ -1,0 +1,21 @@
+page-reviews {
+ #bttnreview
+ {
+     position: relative;
+     bottom : 30px;
+     right:-115px;
+     display: inline;
+     background-color:inherit; 
+ }
+ ion-list
+    {
+        //max-width: fit-content !important;
+        width: 100vw !important;
+        position: relative;
+        left:-16px;
+    }
+/* ion-list ion-item  button
+ {
+     margin-bottom:0px; 
+ }*/
+}

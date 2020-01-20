@@ -1,0 +1,29 @@
+<ion-header mode="md" >
+    <page-top-bar  Pagetitle="Contact Support"></page-top-bar>
+</ion-header>
+
+
+<ion-content padding>
+ <ion-list id="list">
+   <ion-item>
+     <ion-icon name="person" item-start></ion-icon>
+     <font>Account</font>
+   </ion-item>
+   <button ion-item  (click)="openMessage()">
+      <ion-icon name="bug" item-start></ion-icon>
+      <font>Reprot A bug</font>
+   </button>
+   <button ion-item  (click)="openMessage()">
+      <ion-icon name="bulb" item-start></ion-icon>
+      <font> Feature request</font>
+   </button>
+   <button ion-item (click)="openMessage()">
+      <ion-icon name="information-circle" item-start></ion-icon>
+      <font> General Feedback</font>
+   </button>
+ </ion-list>
+  <!--<div style="padding-top:10px;">
+        <canvas #chartCanvas></canvas>
+   </div>-->
+</ion-content>
+<page-fab-camera></page-fab-camera>

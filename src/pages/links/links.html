@@ -1,0 +1,32 @@
+<ion-header mode="md" >
+  <page-top-bar  [Pagetitle]="title"></page-top-bar>
+  <ion-toolbar>
+    <div id="tabs">
+       <ion-segment  class="SwipedTabs-tabs">
+         <ion-segment-button  *ngFor='let tab of tabs ; let i = index ' id="tabTitle{{i}}" value="IngoreMe" (click)="selectTab(i)"
+         [ngClass]='{ "SwipedTabs-activeTab" : ( this.SwipedTabsSlider  && ( this.SwipedTabsSlider.getActiveIndex() === i || (  tabs.length -1 === i&& this.SwipedTabsSlider.isEnd()))) }'   >
+         <ion-icon large name="{{tab}}"></ion-icon>
+       </ion-segment-button>
+     </ion-segment>
+   </div>
+     <!-- here is our dynamic line  "indicator"-->
+     <div id='indicator' class="SwipedTabs-indicatorSegment"></div>
+ </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content padding>
+  <ion-slides #SwipedTabsSlider  effect="slide" (ionSlideDrag)="animateIndicator($event)"
+  (ionSlideDidChange)="updateIndicatorPosition()"
+  (ionSlideWillChange)="updateIndicatorPosition()"
+  (panend)="updateIndicatorPositionOnTouchEnd()"
+  [pager]="false">
+        <ion-slide style="overflow-y: auto;height: inherit !important;max-width: fit-content !important;">
+           <page-shoping-links></page-shoping-links>
+        </ion-slide>
+        <ion-slide style="overflow-y: auto;height: inherit !important">
+           <page-shoping-places></page-shoping-places>
+        </ion-slide>
+  </ion-slides>
+</ion-content>  

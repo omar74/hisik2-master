@@ -1,0 +1,81 @@
+<ion-header mode="md" >
+    <page-top-bar  Pagetitle="My Reviews"></page-top-bar>
+</ion-header>
+
+<br><br>
+
+
+
+<ion-content >
+    <div *ngFor="let review of ReviewsLikeResult;let i = index" >
+        <ion-card>
+         <ion-list>
+            <!--<ion-item-sliding>-->  
+              <ion-item>
+              <ion-avatar item-start>
+                <img *ngIf="review.userData?.ImageURL" src="{{review.userData?.ImageURL}}">
+                <img *ngIf="!review.userData?.ImageURL" src="../assets/imgs/download.jpg">
+              </ion-avatar>
+              <div *ngIf="review?.islike;then notlike;else like">
+              </div> 
+              <ng-template #notlike>
+                  <button ion-button  icon-only color="danger" (click)="dislike(i,review?.likeid)">
+                      <ion-icon name="thumbs-up" ></ion-icon> 
+                  </button>
+                  <button *ngIf="review?.likecount>0" ion-button color="danger" (click)="showlikes(review.review?.id)">
+                    {{review?.likecount}}
+                  </button>
+              </ng-template>
+              <ng-template #like>
+                 <button ion-button  icon-only color="danger" (click)="Like(i,review.review?.id)">
+                  <ion-icon name="ios-thumbs-up-outline"></ion-icon> 
+                 </button>
+                 <button *ngIf="review?.likecount>0" ion-button color="danger" (click)="showlikes(review.review?.id)">
+                  {{review?.likecount}}
+                 </button>
+                 <button *ngIf="review?.likecount==0" ion-button color="danger">
+                  {{review?.likecount}}
+                 </button>
+              </ng-template> 
+              <div *ngFor="let replay of ReviewsReplayResult;let x = index" >
+                 <div *ngIf="replay.review?.id == review.review?.id;then print"></div>
+                  <ng-template #print>
+                     <ion-icon name="ios-text-outline"  (click)="AddReplay(review.review?.id)"></ion-icon>
+                        {{replay?.replayCount}}
+                  </ng-template>
+              </div>
+                 
+              <br>
+              <ion-card-content >
+                <h1>{{review.review.userData?.UserName}}</h1>
+                <p>{{review.review.timestamp | date:'medium'}}</p>
+                <p>{{review.review?.text}}</p>
+              </ion-card-content>
+                <ionic3-star-rating 
+                activeIcon = "ios-star"
+                defaultIcon = "ios-star-outline"
+                activeColor = "#FFDF00" 
+                defaultColor = "#FFDF00"
+                readonly="true"
+                [rating]="review.review?.rate">
+            </ionic3-star-rating>
+            <button ion-button clear item-end  icon-only color="danger" (click)="Setting($event,i,review?.review,review?.review.id)">
+              <ion-icon name="settings"></ion-icon>
+            </button>
+           </ion-item>
+           <!--<ion-item-options side="right">
+                <button ion-button color="primary" (click)="delete(i,review.review?.id)">
+                  <ion-icon name="trash"></ion-icon>
+                  delete
+                </button>
+                <button ion-button color="secondary" (click)="update(i,review?.review)">
+                  <ion-icon name="repeat"></ion-icon>
+                  update
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>-->
+    </ion-list>  
+    </ion-card>
+ </div>
+</ion-content>
+<page-fab-camera></page-fab-camera>

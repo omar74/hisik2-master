@@ -1,0 +1,27 @@
+page-message {
+    ion-header ion-navbar ion-title
+    {
+        background-color: #075682;
+        color:#00093C;
+    }
+    font-family: Axi Forma,sans-serif;
+    ion-list
+    {
+        width: 100vw !important;
+        position: relative;
+        left:-16px;
+        top:-14px;  
+    }
+    ion-list ion-item
+    {
+        position: relative;
+        right:0px;
+    }
+    textarea{
+        display: block;
+        width:  109%;
+        border: none;
+        margin:auto;
+        border-radius:10px; 
+        }
+}

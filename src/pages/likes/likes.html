@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Likes</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close-circle" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let user of UseresLikes">
+      <ion-avatar item-start>
+        <img *ngIf="user.AllReviews.userData?.ImageURL" src="{{user.AllReviews.userData?.ImageURL}}">
+        <img *ngIf="!user.AllReviews.userData?.ImageURL" src="../assets/imgs/download.jpg">
+      </ion-avatar>
+      <h2>{{user.AllReviews.userData?.UserName}}</h2>
+    </ion-item>
+  </ion-list>
+</ion-content>

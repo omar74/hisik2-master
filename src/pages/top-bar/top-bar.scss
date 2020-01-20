@@ -1,0 +1,35 @@
+page-top-bar {
+    #Notifcationbadge
+    {
+        position: absolute;
+        left:15px;
+        top:0px;
+        object-fit:contain;
+        overflow: hidden;
+        -webkit-border-radius: 100% !important;
+        text-align: center;
+        width:18px;
+        height:18px;
+        font-size:4vw;
+        padding:0px;
+        padding-top: 1px;
+        box-sizing: border-box;
+        background-color:red;//color($colors,danger);
+        border:1px solid white;
+        font-weight: bold;
+    }
+    #Notifcationbadge p
+    {
+        position: relative;
+       // top:3px;
+        margin: auto;
+        color:white;
+        font-weight: bold;
+        text-align: center;
+    }
+    #notification
+    {
+        right:10px; 
+    }
+    
+}

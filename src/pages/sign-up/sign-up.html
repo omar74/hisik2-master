@@ -1,0 +1,99 @@
+<!--
+  Generated template for the SignUpPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header> 
+
+  <ion-navbar>
+    <ion-title>signUp</ion-title>
+  </ion-navbar>
+ 
+</ion-header>
+
+<ion-content class="login-content" padding>
+<div>
+<p class ="h">Welcome to HISIK</p>
+</div>
+    <div class="login-box">
+      
+        <form #form="ngForm" (ngSubmit)="Register(form)">
+        <ion-row>
+          <ion-col>
+            <ion-list inset>
+
+
+              <ion-item [ngClass]="{'inputErorr': FirstName.touched && FirstName.dirty && !FirstName.valid}">
+                <ion-input type="text" placeholder="FirstName is required" ngModel name="FirstName"  required  #FirstName="ngModel" pattern="[a-zA-z]+" required [ngModel]="user?.FirstName" clearInput="true"></ion-input>
+              </ion-item>
+              <div class="error" *ngIf="FirstName.touched && FirstName.dirty && !FirstName.valid">
+               <div  *ngIf="FirstName.errors.pattern">
+                 <p>First Name can contain only a lowercase letters or a uppercase letters.</p> 
+              </div>
+            </div> 
+
+
+              <ion-item>
+                <ion-input type="text" placeholder="LastName is required" ngModel name="LastName"  required #LastName="ngModel" pattern="[a-zA-z]+" required  [ngModel]="user?.LastName" clearInput="true"></ion-input>
+              </ion-item>
+              <div class="error" *ngIf="LastName.touched && LastName.dirty && !LastName.valid">
+                 <div *ngIf="LastName.errors.pattern">
+                  <p>Last Name can contain only a lowercase letters or a uppercase letters.<p> 
+               </div>
+              </div>
+
+
+              <ion-item [ngClass]="{'inputErorr': (Username.touched && Username.dirty && !Username.valid) || usernameEmailError}">
+                  <ion-input type="text" placeholder="UserName is required " name="UserName"  required #Username="ngModel" pattern="[a-zA-Z0-9 _-]+"  [ngModel]="user?.UserName" clearInput="true"></ion-input>
+              </ion-item>
+              <div class="error" *ngIf="Username.touched && Username.dirty && !Username.valid">
+                 <div  *ngIf="Username.errors.pattern">
+                  <p>User Name can contain only Letters and numbers or underscore or - or space.</p> 
+                 </div>
+              </div> 
+
+
+              <ion-item [ngClass]="{'inputErorr': (Email.touched && Email.dirty && !Email.valid) || usernameEmailError}">
+                <ion-input type="email" placeholder="Email is required " name="Email" required #Email="ngModel" pattern="([a-zA-Z0-9_.-]+@([a-zA-Z0-9_-]+).+[a-zA-Z0-9_]{2,})+"  [ngModel]="user?.Email" clearInput="true"></ion-input>
+              </ion-item>
+              <div class="error" *ngIf="Email.touched && Email.dirty && !Email.valid">
+                 <div  *ngIf="Email.errors.pattern">
+                   <p>must match this pattern "example@example.domain" .</p>
+                </div>
+             </div>
+
+            <ion-item [ngClass]="{'inputErorr': (Password.touched && Password.dirty && !Password.valid) || ConfirmPassowrderror }">
+                <ion-input type="password" name="Password" maxlength="18" minlength="8" placeholder="Password is required" #Password="ngModel" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=._*/-])([a-zA-Z0-9@#$%^&+=*._/-])+" required ngModel></ion-input>
+            </ion-item>
+            <div class="error" *ngIf="Password.touched && Password.dirty && !Password.valid">
+              <div  *ngIf="Password.errors.pattern">
+                  <p> - Password must contain  a number, a lowercase letters, a uppercase letters, and a special character</p> 
+              </div>
+              <div  *ngIf="Password.errors.maxlength">
+                 <p> - password maximum length is "18"</p> 
+              </div>
+              <div  *ngIf="Password.errors.minlength">
+                 <p> - Password minimum length is "8" and maximum length is "18"</p> 
+              </div>
+            </div>
+
+            <ion-item [ngClass]="{'inputErorr': ConfirmPassowrderror}">
+                <ion-input type="password" name="ConfirmPassword" placeholder="Rewrite the new password is required"  required ngModel></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+         
+        <ion-row>
+          <ion-col class="signup-col">
+            <button ion-button class="submit-btn" full type="submit" [disabled]="!form.valid" >
+            Register
+            </button>
+          </ion-col>
+        </ion-row>
+        
+      </form>
+    </div>
+  </ion-content>

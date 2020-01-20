@@ -1,0 +1,89 @@
+<ion-header>
+  <page-top-bar  [Pagetitle]='Search'></page-top-bar>
+<ion-toolbar>
+<ion-searchbar
+style="font-family: AxiForma;font-weight: medium;"
+spellcheck="true"
+autocorrect="on"
+autocomplete="on"
+animated="true"
+showCancelButton="true"
+placeholder="Search…"
+#q
+(keyup.enter)="search(q.value)"
+[(ngModel)]="myInput"
+(ionInput)="FindName($event)"
+[showCancelButton]="shouldShowCancel"
+(ionCancel)="onCancel($event)">
+</ion-searchbar>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div *ngIf="(Branditem?.length>0 || categoryitem?.length>0 || products?.length>0 || searchText == '' );then Result else NoResult">
+</div>
+<ng-template #Result>
+<ion-item-group>
+<ion-item-divider *ngIf="Branditem?.length>0" >
+ <b style="font-family: AxiForma;font-weight: bold;"> Possible Brands </b>
+</ion-item-divider>
+<button ion-item *ngFor="let brand of Branditem" style="font-family: AxiForma;font-weight: bold;" (click)="SearchResualt('brand',brand?.Name,userSearch)">{{brand?.Name}}</button>
+
+<ion-item-divider *ngIf="categoryitem?.length>0"  >
+  <b style="font-family: AxiForma;font-weight: bold;">Possible Category</b>
+</ion-item-divider>
+<button  ion-item *ngFor="let category of categoryitem" style="font-family: AxiForma;font-weight: bold;" (click)="SearchResualt('category',category?.Name,userSearch)">{{category?.Name}}</button>
+<div *ngIf="products?.length>0">
+<ion-item-divider>
+  <b style="font-family: AxiForma;font-weight: bold;">Possible Products</b>
+</ion-item-divider>
+    <ion-item *ngFor='let product of RateResult;let i = index'>
+          <div *ngIf='isauth;then show else hide'></div>
+          <ng-template #show>
+              <div *ngIf='FavResult[i].isfav;then dislike else liked'>
+                </div>
+                <ng-template #dislike>
+                    <ion-icon name="bookmark" color="danger" style="margin-left: 220px"></ion-icon>
+                </ng-template>
+                <ng-template #liked>
+                    <ion-icon name="ios-bookmark-outline" color="dark" style="margin-left: 220px"></ion-icon>
+                </ng-template>
+          </ng-template>
+          <ng-template #hide>
+              <ion-icon name="bookmark-outline" style="margin-left: 220px"></ion-icon>
+          </ng-template>
+         
+      <ion-avatar item-start>
+        <img src="{{product.product?.ImageURL}}">
+      </ion-avatar>
+      <h2 style="font-family: AxiForma;font-weight: medium;" >{{product.product?.name}}</h2>
+      <p style="font-family: AxiForma;font-weight: medium;" >{{product.product?.Description}}</p>
+      <div style="display: block">
+          <span [ngClass]="(product?.stars>=1)?'fa fa-star checked':'fa fa-star'"></span>
+          <span [ngClass]="(product?.stars>=2)?'fa fa-star checked':'fa fa-star'"></span>
+          <span [ngClass]="(product?.stars>=3)?'fa fa-star checked':'fa fa-star'"></span>
+          <span [ngClass]="(product?.stars>=4)?'fa fa-star checked':'fa fa-star'"></span>
+          <span [ngClass]="(product?.stars==5)?'fa fa-star checked':'fa fa-star'"></span>
+          <p style="display: inline-block" *ngIf="product?.rate">{{product?.rate}}</p>
+          <p style="display: inline-block" *ngIf="!product?.rate">0</p>
+      </div>
+      <button 
+      style="font-family: AxiForma;font-weight: medium;"
+      (click)="SearchResualt3(product?.product)"
+      style="margin-left: 160px" 
+      ion-button color="danger" round>
+      Show</button>
+    </ion-item>
+</div> 
+</ion-item-group>
+</ng-template>
+<ng-template #NoResult>
+  <br>
+ <p style="margin-left: 30px;font-family: AxiForma semiBold;font-weight: bold;" *ngIf="shownoResult==true">No search reasult found for : <b style="color:#5A5A5A ">{{searchText}}</b> </p>
+</ng-template>
+
+</ion-content> 
+
+<page-fab-camera></page-fab-camera>
+

@@ -1,0 +1,28 @@
+
+<ion-header mode="md" >
+    <page-top-bar  Pagetitle="Edit Replay"></page-top-bar>
+</ion-header>
+
+
+<ion-content padding>
+    <form #form="ngForm" (ngSubmit)="EditRepaly(form)">
+        <ion-item>
+          <ion-input type="text" [ngModel]="replay?.text" name="text" required placeholder=" put your reply here"></ion-input>
+        </ion-item> 
+      
+    
+        <ion-buttons end>
+          <button ion-button icon-end color="royal" [disabled]="!form.valid">
+            updata
+            <ion-icon name="send"></ion-icon>
+          </button>
+        </ion-buttons>
+  </form>
+  <ion-item>
+      <button ion-button block  icon-start color="danger" (click)="cancel()">
+        <ion-icon ios="ios-close" md="md-close"></ion-icon>
+            Cancel
+       </button>
+  </ion-item>
+</ion-content>
+<page-fab-camera></page-fab-camera>

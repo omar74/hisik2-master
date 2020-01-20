@@ -1,0 +1,60 @@
+<!--
+  Generated template for the LogInPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>logIn</ion-title> 
+  </ion-navbar>
+
+</ion-header>
+
+ 
+  
+
+
+
+<ion-content class="login-content" padding>
+
+ 
+   <img class="img" src="../assets/imgs/Hisik-Logo.png">
+
+
+
+    <div class="login-box">
+      <form #form="ngForm" (ngSubmit)="login(form)"> 
+        <ion-row>
+          <ion-col>
+            <ion-list inset>
+              
+              <ion-item [ngClass]="{'inputErorr': Email.touched && Email.dirty && !Email.valid}">
+                <ion-input type="email" placeholder="Email is required" ngModel name="Email"  required  #Email="ngModel" pattern="([a-zA-Z0-9_.-]+@([a-zA-Z0-9_-]+).+[a-zA-Z0-9_]{2,})+"  [ngModel]="user?.Email" clearInput="true"></ion-input>
+              </ion-item>
+              <div class="error" *ngIf="Email.touched && Email.dirty && !Email.valid">
+                 <div  *ngIf="Email.errors.pattern">
+                   <p>must match this pattern "example@example.domain" .</p>
+                </div>
+             </div>
+              
+              <ion-item [ngClass]="{'inputErorr': Password.touched && Password.dirty && !Password.valid}">
+                <ion-input type="password" placeholder="Password is required" ngModel #Password="ngModel" name="Password"  required></ion-input>
+              </ion-item>
+              
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row>
+          <ion-col class="signup-col">
+            <button ion-button class="submit-btn" full type="submit" [disabled]="!form.valid" >Login</button>
+            <button ion-button class="register-btn" block clear (click)="Create()">Create New Account</button>
+            <button ion-button class="register-btn" block clear (click)="forget()" >forget password</button>
+          </ion-col>
+        </ion-row>
+         
+      </form>
+    </div>
+  </ion-content>

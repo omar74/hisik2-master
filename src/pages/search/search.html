@@ -1,0 +1,76 @@
+
+
+<ion-searchbar
+    style="font-family: AxiForma;font-weight: medium;"
+    [(ngModel)]="myInput"
+    [showCancelButton]="shouldShowCancel"
+    full colur="light"
+    (click)="searchbar()">
+</ion-searchbar>
+
+<div *ngIf="isauthinticated">
+    <div>
+        <br> 
+        <h1 style="text-align: left; font-family: AxiForma semiBold;font-weight: bold;" *ngIf="recommandeditem?.length>0" >Recommended</h1>
+
+        <div style="display: block" *ngIf="recommandeditem?.length>0" >
+            <div style="display: inline-block" *ngFor="let m of recommandeditem;" > 
+                <ion-item  (click)="Detials(m)">
+                    <ion-thumbnail slot="start">
+                     <img [src]="m?.ImageURL">
+                    </ion-thumbnail>
+                </ion-item>
+            </div>
+        </div> 
+        
+        <div style="text-align: center" *ngIf="recommandeditem?.length>0" >
+             <button 
+                style="font-family: AxiForma;font-weight: medium;"
+                ion-button color="danger" round
+                (click)="Recommended()">
+                Show More
+             </button>
+        </div>
+        
+        <h1 style="text-align: left ; font-family: AxiForma semiBold; font-weight: bold; color:danger;" *ngIf="recentsearch?.length>0">Recent Search</h1> 
+        
+        <div style="display: block" *ngIf="recentsearch?.length>0">
+            <div *ngFor="let item of recentsearch; let i=index;">
+               <div *ngIf="i<2">
+                    <ion-item >
+                        <h1 style="font-family: AxiForma ; font-weight: Medium;color:#5A5A5A;" item-none > {{ item.text }} </h1>
+                        <p style="font-family: AxiForma light;color:#075682 ;" list-start> {{ item?.timestamp | date }} </p>
+                        <ion-icon color="danger" name="trash" item-end (click)="RemoveSearch(item.id)"></ion-icon>
+                    </ion-item>
+               </div>
+            </div>
+        </div>
+        
+        
+        <div style="text-align: center" *ngIf="recentsearch?.length>2">
+            <button 
+               style="font-family: AxiForma;font-weight: medium;"
+               ion-button color="danger" round
+               (click)="ShowMore()">
+               Show More
+            </button>
+        </div>
+        
+        
+        
+        <h1 style="text-align: left; font-family: AxiForma;font-weight: medium;" *ngIf="popualeritem?.length>0">Popualer Searches</h1> 
+        
+        
+            <div style="width:80px;height:60px; display: block;" class="ion-text-center" *ngIf="popualeritem?.length>0">
+                <div style="display: inline-block" *ngFor="let r of popualeritem;">
+                    <ion-item  (click)="Detials(r)">
+                        <ion-avatar start>
+                            <img [src]="r?.ImageURL">
+                        </ion-avatar>
+                        <h4>{{ r?.text }}</h4>
+                    </ion-item>
+                </div>
+            </div>
+    </div>
+</div>
+

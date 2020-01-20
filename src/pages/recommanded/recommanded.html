@@ -1,0 +1,19 @@
+<ion-header mode="md" >
+  <page-top-bar  Pagetitle="Recommanded Search" Noifictaion="1"></page-top-bar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card (click)="RecReslt(product)">
+    <div style="display: block" >
+      <div style="display: inline-block"> 
+          <ion-item *ngFor="let m of recommandeditem;">
+              <ion-thumbnail slot="start">
+              <img src="m?.ImageURL">
+              </ion-thumbnail>
+          </ion-item>
+      </div>
+  </div> 
+  </ion-card>
+</ion-content>
+<page-fab-camera></page-fab-camera>
+

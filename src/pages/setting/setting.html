@@ -1,0 +1,176 @@
+<ion-header mode="md" >
+    <page-top-bar  [Pagetitle]="Setting"></page-top-bar>
+</ion-header>
+
+
+
+<ion-content padding>
+   <div id="Photo" *ngIf="isauth">     
+    <ion-avatar id="avatar">
+       <img *ngIf="imagePath" src="{{imagePath}}">
+       <img *ngIf="imagePath==''" src="../assets/imgs/download.jpg">
+    </ion-avatar>
+    <ion-fab right bottom id="fabs">
+      <button  ion-fab icon-only (click)="showActionSheet()">
+        <ion-icon name="camera" color="blue"></ion-icon>
+      </button>
+    </ion-fab>
+  </div> 
+ <!--<ionic3-star-rating 
+  (click)="getrate()"
+  activeIcon = "ios-star"
+  defaultIcon = "ios-star-outline"
+  activeColor = "#FFDF00" 
+  defaultColor = "grey"
+  readonly="false"
+   [rating]="4">
+  </ionic3-star-rating>
+ <ion-grid>
+     <ion-row>
+       <ion-col text-center>
+          <ion-note color="primary" id="note">Update the profile photo</ion-note>
+       </ion-col>
+     </ion-row>
+<ion-row>
+      <ion-col>
+        <button ion-button block outline color="danger"  round  type="button" icon-start  (click)="Usecamera()">
+          <ion-icon name='camera'></ion-icon>
+           Use Camera
+        </button>
+      </ion-col>
+      <ion-col>
+          <button ion-button block outline color="danger" round type="button" icon-start  (click)="UploadImage()">
+           <ion-icon name='image'></ion-icon>
+            Upload Image
+          </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>-->
+  
+  <form #form="ngForm" (ngSubmit)="SaveChanges(form)" *ngIf="isauth">
+    <ion-list>
+      <ion-list-header color="danger">
+          <ion-icon name="information-circle" item-start></ion-icon> 
+       Update your information 
+      </ion-list-header> 
+
+      <ion-item [ngClass]="{'inputErorr': FirstName.touched && FirstName.dirty && !FirstName.valid}">
+        <ion-label color="primary" stacked>First Name</ion-label>
+        <ion-input type="text"  name="FirstName" placeholder="First Name is required"  #FirstName="ngModel" pattern="[a-zA-z]+" required [ngModel]="user?.FirstName" clearInput="true"></ion-input>
+      </ion-item>
+      <div class="error" *ngIf="FirstName.touched && FirstName.dirty && !FirstName.valid">
+          <div  *ngIf="FirstName.errors.pattern">
+              <p>First Name can contain only a lowercase letters or a uppercase letters.</p> 
+          </div>
+      </div>
+
+      <ion-item [ngClass]="{'inputErorr': LastName.touched && LastName.dirty && !LastName.valid}">
+        <ion-label color="primary" stacked>Last Name</ion-label>
+        <ion-input type="text" name="LastName" placeholder="Last Name is required"  #LastName="ngModel" pattern="[a-zA-z]+" required  [ngModel]="user?.LastName" clearInput="true"></ion-input>
+      </ion-item>
+      <div class="error" *ngIf="LastName.touched && LastName.dirty && !LastName.valid">
+          <div *ngIf="LastName.errors.pattern">
+              <p>Last Name can contain only a lowercase letters or a uppercase letters.<p> 
+          </div>
+      </div>
+
+      <ion-item [ngClass]="{'inputErorr': (Username.touched && Username.dirty && !Username.valid) || usernameEmailError }">
+        <ion-label color="primary" stacked>User Name</ion-label>
+        <ion-input type="text" name="Username" placeholder="User Name is required"  #Username="ngModel" pattern="[a-zA-Z0-9 _-]+" required  [ngModel]="user?.UserName" clearInput="true"></ion-input>
+      </ion-item>
+      <div class="error" *ngIf="Username.touched && Username.dirty && !Username.valid">
+        <div  *ngIf="Username.errors.pattern">
+            <p>User Name can contain only Letters and numbers or underscore or - or space.</p> 
+        </div>
+      </div>
+
+      <ion-item [ngClass]="{'inputErorr': (Email.touched && Email.dirty && !Email.valid) || usernameEmailError}">
+        <ion-label color="primary" stacked>Email</ion-label>
+        <ion-input type="email" name="Email" placeholder="Email is required"   #Email="ngModel" pattern="([a-zA-Z0-9_.-]+@([a-zA-Z0-9_-]+).+[a-zA-Z0-9_]{2,})+" required  [ngModel]="user?.Email" clearInput="true"></ion-input>
+      </ion-item>
+      <div class="error" *ngIf="Email.touched && Email.dirty && !Email.valid">
+          <div  *ngIf="Email.errors.pattern">
+              <p>must match this pattern "example@example.domain" .</p>
+          </div>
+      </div>
+
+      <ion-item *ngIf="changePassword == false">
+        <ion-label color="primary" stacked>Password</ion-label>
+        <ion-input  disabled="true" type="password" name="Password"  placeholder="Password"   [ngModel]="user?.Password"></ion-input>
+      </ion-item>
+      <ion-item  *ngIf="changePassword == false">
+          <button class="changePasswordbutton" ion-button round  color="danger" (click)="ChangePassword()">
+            Change Password
+          </button>
+      </ion-item>
+
+      <div class="changePassword" *ngIf="changePassword == true">
+        <ion-item-group>
+         <ion-item-divider color="light">Update your password</ion-item-divider>
+          <ion-item [ngClass]="{'inputErorr': OldPassowrderror }">
+              <ion-label color="primary" stacked>Old Password</ion-label>
+              <ion-input type="password" name="ConfirmOldPassword"  placeholder="Rewrite your old Password is required"  required ngModel></ion-input>
+          </ion-item>
+
+          <ion-item [ngClass]="{'inputErorr': (newPassword.touched && newPassword.dirty && !newPassword.valid) || ConfirmPassowrderror }">
+              <ion-label color="primary" stacked>New Password</ion-label>
+              <ion-input type="password" name="newPassword" maxlength="18" minlength="8" placeholder="New password is required" #newPassword="ngModel" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=._*/-])([a-zA-Z0-9@#$%^&+=*._/-])+" required ngModel></ion-input>
+          </ion-item>
+          <div class="error" *ngIf="newPassword.touched && newPassword.dirty && !newPassword.valid">
+            <div  *ngIf="newPassword.errors.pattern">
+                <p> - Password must contain  a number, a lowercase letters, a uppercase letters, and a special character</p> 
+            </div>
+            <div  *ngIf="newPassword.errors.maxlength">
+               <p> - password maximum length is "18"</p> 
+            </div>
+            <div  *ngIf="newPassword.errors.minlength">
+               <p> - Password minimum length is "8" and maximum length is "18"</p> 
+            </div>
+          </div>
+          <ion-item [ngClass]="{'inputErorr': ConfirmPassowrderror}">
+              <ion-label color="primary" stacked>Confirm Password</ion-label>
+              <ion-input type="password" name="ConfirmPassword" placeholder="Rewrite the new password is required"  required ngModel></ion-input>
+          </ion-item>
+        </ion-item-group>  
+      </div>
+
+      <!--<ion-item>
+        <ion-label color="primary">App Start in</ion-label>
+        <ion-select  ngModel="Scanner" name="Appstart" interface="alert"   placeholder="App Start"  cancelText="Dismiss" okText="Okay">
+          <ion-option value="Scanner" >Scanner</ion-option>
+          <ion-option value="Profile">Profile</ion-option>
+          <ion-option value="Search">Search</ion-option>
+        </ion-select>
+      </ion-item>-->
+
+      <button ion-button type="submit" round block color="danger" [disabled]="!form.valid" icon-start >
+          <ion-icon name="done-all" item-start></ion-icon>
+          Save Changes
+      </button>
+
+    </ion-list>
+  </form>
+
+  <button ion-button outline block color="danger" (click)="LogOut()" *ngIf="isauth" icon-start>
+     <ion-icon name="log-out"></ion-icon>
+       Log Out
+  </button> 
+  <div class="hero-image" *ngIf="!isauth">
+    <div class="hero-text">
+      <h1 style="font-size:50px">Welcome to <span>HISIK</span></h1>
+      <h6>Please,login or make an account first!</h6>
+      <div class="authbutton">
+        <button ion-button icon-end block round outline id="authlog" (click)="Login()" *ngIf="!isauth" >
+            Log In
+          <ion-icon name="log-in"></ion-icon>
+         </button>
+         <button ion-button icon-end block round outline id="authlog"  (click)="SignUp()" *ngIf="!isauth">
+            Sign Up
+          <ion-icon name="md-person-add"></ion-icon>
+         </button>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+<page-fab-camera></page-fab-camera>

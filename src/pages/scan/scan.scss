@@ -1,0 +1,122 @@
+page-scan {
+    holder
+     {
+       background-color:white; 
+     }
+    .trans {
+      position: relative;
+      width:100%;
+      height:100px;
+      bottom:100px;
+      margin:0px;
+      background-color: rgb(205, 223, 228);
+      //border: 1px solid red; 
+      z-index: 1;
+
+    }
+    trans2
+    {
+      position: relative;
+      width:100%;
+      height:100px;
+      bottom:-540px;
+      margin:0px;
+      background-color: inherit;
+      //border: 1px solid red; 
+      z-index: 1;
+    }
+    #topRight button
+    {
+      background-color:rgba(7, 86, 130,0.6);
+      border: 1px solid white;
+    }
+    .img
+    {
+      width:100%;
+      height:500px ;
+      display: block;
+      border: 1px solid #f0f5ff;
+      //background: url(../assets/imgs/download.jpg) no-repeat center; 
+    }
+    /*.img 
+    {
+     img{
+      position: relative;
+      top: -12.4%;
+      margin:auto;
+      max-width: 100%;
+      box-sizing: border-box;
+      max-height:520px;
+      border: 1px solid  #00093C;
+      //border:2px solid color($colors,danger);
+      object-fit:contain;
+      overflow: hidden;
+     }
+    }*/
+    #fabs3 
+    {
+     position: relative;
+     left:20px;
+     display: inline-block;
+     top:20px;
+     z-index: 1;
+    } 
+    #fabs1 
+    {
+     position: relative;
+     display: inline-block;
+     top:20px;
+     right:-100px;
+     z-index: 1;
+    } 
+    #fabs2 
+    {
+     position: relative;
+     right:-180px;
+     top:20px;
+     display: inline-block;
+     z-index: 1;
+    } 
+    #fabs1 button,#fabs2 button,#fabs3 button
+    {
+      background-color:#075682;
+      border: 1px solid white;
+    }
+    .slide
+    {
+      position: relative;
+      display: block;
+      width:70%;
+      height:70px;
+      bottom:50px;
+      right:-55px;
+      z-index: 2;
+      color:white;
+      font-family: Axi Forma;
+      //background-color: red;
+      //border:1px solid red;
+    }
+    .slide ion-slides 
+    {
+      max-width:fit-content;
+    }
+    .slide ion-slides  ion-slide h2
+    {
+       text-align: center;
+       position: relative;
+       right: -20px;
+    }
+    #forword
+    {
+      display: inline;
+      position: relative;
+      bottom:100px;
+      right:-320px;
+    }
+    #back
+    {
+      display: inline;
+      position: relative;
+      bottom:-10px;
+    }
+}

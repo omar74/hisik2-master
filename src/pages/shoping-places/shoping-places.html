@@ -1,0 +1,89 @@
+<!--
+  Generated template for the ShopingPlacesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div *ngIf="places?.length>0">
+<ion-card class="adv-map" *ngFor="let place of places">
+ 
+    <div style="position: relative">
+      	<agm-map [latitude]="place.geometry.location?.lat" [longitude]="place.geometry.location?.lng"  (mapClick)="onSetMarker($event)" [zoom]="16">
+  					<agm-marker [latitude]="place.geometry.location?.lat" [longitude]="place.geometry.location?.lng" [title]="place?.name" [label]="'M'" *ngIf="!marker"></agm-marker>
+            <agm-marker [latitude]="marker?.lat" [longitude]="marker?.lng" [label]="'M'" [title]="place?.name" *ngIf="marker"></agm-marker> 
+        </agm-map>
+      <ion-fab right top>
+        <button ion-fab class="fab-map">
+          <ion-icon name='pin'></ion-icon>
+        </button>
+      </ion-fab>
+    </div>
+    <ion-item>
+        <ion-avatar item-start>
+            <img src="{{place?.icon}}">
+        </ion-avatar>     
+        <h2>{{place?.name}}</h2>
+        <p>{{place?.vicinity}}</p>
+    </ion-item>
+    <ion-grid>
+        <ion-row class="gridrow" *ngIf="place?.user_ratings_total">
+            <ion-col class="first">Total Reviews</ion-col>
+            <ion-col>{{place?.user_ratings_total}}</ion-col>
+        </ion-row>
+        <ion-row class="gridrow" *ngIf="!place?.user_ratings_total">
+                <ion-col class="first">Total Reviews</ion-col>
+                <ion-col>0</ion-col>
+        </ion-row>
+        <ion-row  class="gridrow" *ngIf="place?.rating">
+            <ion-col class="first">Rating</ion-col>
+            <ion-col>{{place?.rating}}</ion-col>
+        </ion-row>
+        <ion-row  class="gridrow" *ngIf="!place?.rating">
+                <ion-col class="first">Rating</ion-col>
+                <ion-col>0</ion-col>
+        </ion-row>
+        <ion-row *ngIf="place?.rating">
+                <ion-col class="Rating">
+                        <ionic3-star-rating 
+                        activeIcon = "ios-star"
+                        defaultIcon = "ios-star-outline"
+                        activeColor = "#FFDF00" 
+                        defaultColor = "#FFDF00"
+                        readonly="true"
+                         [rating]="place?.rating">
+                        </ionic3-star-rating>
+                </ion-col>
+        </ion-row>
+        <ion-row *ngIf="!place?.rating">
+                <ion-col class="Rating">
+                        <ionic3-star-rating 
+                        activeIcon = "ios-star"
+                        defaultIcon = "ios-star-outline"
+                        activeColor = "#FFDF00" 
+                        defaultColor = "#FFDF00"
+                        readonly="true"
+                         [rating]="0">
+                        </ionic3-star-rating>
+                </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!--<ion-item actions>
+      <span ion-text item-start color="secondary" class="item-bold">18 min</span>
+      <span ion-text item-start color="subtle">(2.6 mi)</span>
+      <button ion-button color="primary" clear item-end icon-start>
+        <ion-icon name='navigate'></ion-icon>
+        Start
+      </button>
+    </ion-item>-->
+  
+</ion-card>
+</div>
+
+<div>
+  <div class="hero-image" *ngIf="places?.length == 0 && proceed == true">
+    <div class="hero-text">
+      <h1 style="font-size:50px">there is no possible places for this: <span>{{product}}</span></h1>
+    </div>
+  </div>
+ </div>
+  

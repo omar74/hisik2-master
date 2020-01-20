@@ -1,0 +1,15 @@
+<ion-header mode="md" >
+  <page-top-bar  Pagetitle="Recent Search"></page-top-bar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+      <ion-item *ngFor="let item of recentsearch; let i=index;">
+        <p style="font-family: AxiForma;font-weight: medium;"  list-start> {{ item?.timestamp | date }} </p>
+        <h1 style="text-align: center; font-family: AxiForma;font-weight: medium;" item-none > {{ item.text }} </h1>
+        <ion-icon  name="trash" item-end (click)="RemoveSearch(item.id)"></ion-icon>
+    </ion-item>
+    </ion-list>
+</ion-content>
+<page-fab-camera></page-fab-camera>

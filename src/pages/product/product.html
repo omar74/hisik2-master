@@ -1,0 +1,155 @@
+<!--
+  Generated template for the ProductPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header mode="md" >
+    <page-top-bar  Pagetitle="Product Page"></page-top-bar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-avatar id="avatar">
+    <img src="{{product?.ImageURL}}">
+  </ion-avatar>
+<ion-grid>
+  <ion-row>
+    <ion-col col-12 >
+      <div class="scanned" *ngIf='scanimage'>
+        <img  src="{{scanimage}}">
+      </div>
+      <div class="scanned" *ngIf='!scanimage'>
+        <img  src="../assets/imgs/default-thumbnail.jpg">
+      </div>
+    </ion-col>
+    <ion-col class="left">
+      <h3>{{proEvalute?.productRate}}</h3>
+      <h5 col-7 class="rate">{{proEvalute?.productVotes}} Ratings</h5>
+     <div class="stars">
+        <ionic3-star-rating 
+              activeIcon = "ios-star"
+              defaultIcon = "ios-star-outline"
+              activeColor = "#FFDF00" 
+              defaultColor = "#FFDF00"
+              readonly="true"
+              [rating]="proEvalute?.productStars">
+          </ionic3-star-rating>
+     </div>
+      </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-card>
+
+    <ion-card-header>
+     Product Info
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{product?.Description}}
+    </ion-card-content>
+  
+</ion-card>
+<ion-grid>
+    <ion-row>
+      <ion-col>
+         <button ion-button block color="danger" (click)="AddReport()">
+           Report
+         </button>
+      </ion-col>
+      <div *ngIf='proEvalute?.favorite;then dislike ;else liked'>
+      </div>
+      <ng-template #dislike>
+          <ion-col>
+              <button ion-button outline block color="danger" icon-only  (click)="RemoveFromFavourite()">
+                  <ion-icon color="danger" name="heart"></ion-icon>
+              </button>
+           </ion-col>
+      </ng-template>
+      <ng-template #liked>
+          <ion-col>
+              <button ion-button outline block color="danger" icon-only  (click)="AddToFavourite()">
+                  <ion-icon color="dark" name="heart"></ion-icon>
+              </button>
+           </ion-col>
+      </ng-template>
+       <ion-col>
+          <button ion-button block color="danger" (click)="ShowLinks()">
+              Link 
+          </button>
+      </ion-col>
+    </ion-row>
+</ion-grid>
+
+<h3>Reviews</h3>
+
+<div *ngFor="let review of ReviewsLikeResult;let i = index" >
+   <div *ngIf="i<=2">
+    <ion-card>
+        <ion-item>
+          <ion-avatar item-start>
+            <img *ngIf="review.userData?.ImageURL" src="{{review.userData?.ImageURL}}">
+            <img *ngIf="!review.userData?.ImageURL" src="../assets/imgs/download.jpg">
+          </ion-avatar>
+          <div *ngIf="review?.islike;then notlike;else like">
+          </div> 
+          <ng-template #notlike>
+              <button ion-button  icon-only color="danger" (click)="dislike(i,review?.likeid)">
+                  <ion-icon name="thumbs-up" ></ion-icon> 
+              </button>
+              <button *ngIf="review?.likecount>0" ion-button color="danger" (click)="showlikes(review.review?.id)">
+                {{review?.likecount}}
+              </button>
+          </ng-template>
+          <ng-template #like>
+            <button ion-button  icon-only color="danger" (click)="Like(i,review.review?.id)">
+              <ion-icon name="ios-thumbs-up-outline" ></ion-icon> 
+             </button>
+             <button *ngIf="review?.likecount>0" ion-button color="danger" (click)="showlikes(review.review?.id)">
+              {{review?.likecount}}
+             </button>
+             <button *ngIf="review?.likecount==0" ion-button color="danger">
+              {{review?.likecount}}
+             </button>
+          </ng-template> 
+          <div *ngFor="let replay of ReviewsReplayResult;let x = index" >
+              <div *ngIf="replay.review?.id == review.review?.id;then print"></div>
+               <ng-template #print>
+                  <ion-icon name="ios-text-outline"  (click)="AddReplay(review.review?.id)"></ion-icon>
+                     {{replay?.replayCount}}
+               </ng-template>
+           </div>
+          <br>
+          <p>{{review.review.timestamp | date:'medium'}}</p>
+
+            <ionic3-star-rating 
+            activeIcon = "ios-star"
+            defaultIcon = "ios-star-outline"
+            activeColor = "#FFDF00" 
+            defaultColor = "#FFDF00"
+            readonly="true"
+            [rating]="review.review?.rate">
+        </ionic3-star-rating>
+      </ion-item>
+      
+      
+        <ion-card-content >
+          <h1>{{review.review.userData?.UserName}}</h1>
+          <p>{{review.review?.text}}</p>
+        </ion-card-content>
+      
+        
+      
+      </ion-card>
+    </div>    
+</div>
+
+  <ion-list>
+      <ion-item>
+        <ion-icon name="add" item-start (click)="AddReview()"></ion-icon>
+          
+        <ion-icon name="browsers" item-end (click)="ShowReviews()"></ion-icon>
+      </ion-item>
+  </ion-list>
+</ion-content>
+<page-fab-camera ></page-fab-camera>
